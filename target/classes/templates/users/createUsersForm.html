@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Usuarios</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Usuario</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<a class="btn btn-info" href="#" th:href="@{/users/all}">
+					Regresar </a>
+				<form action="#" class="form-horizontal" th:action="@{/users/save}"
+					th:object="${form}" method="post">
+					<fieldset>
+						<span class="pull-right"> <input type="submit"
+							id="submitButton" class="btn btn-success" th:value="Guardar">
+						</span>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Email</th>
+									<th>Password</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="book, itemStat : *{users}">
+
+									<td hidden="true"><input hidden="true"
+										th:field="*{users[__${itemStat.index}__].id}" /></td>
+									<td><input
+										th:placeholder="Nombre + ' ' + ${itemStat.count}"
+										th:field="*{users[__${itemStat.index}__].name}" required /></td>
+									<td><input
+										th:placeholder="Email + ' ' + ${itemStat.count}"
+										th:field="*{users[__${itemStat.index}__].email}" required /></td>
+									<td><input
+										th:placeholder="Password + ' ' + ${itemStat.count}"
+										th:field="*{users[__${itemStat.index}__].password}" required /></td>
+								</tr>
+							</tbody>
+
+
+							<thead>
+								<tr>
+									<th><h2>Telefonos</h2></th>
+								</tr>
+							</thead>
+
+							<thead>
+								<tr>
+									<th>Numero</th>
+									<th>City</th>
+									<th>Code</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="phone, itemStat : *{users[0].phones}">
+
+									<td hidden="true"><input hidden="true"
+										th:field="*{users[0].phones[__${itemStat.index}__].id}" /></td>
+									<td><input
+										th:placeholder="Numero + ' ' + ${itemStat.count}"
+										th:field="*{users[0].phones[__${itemStat.index}__].number}"
+										required /></td>
+									<td><input
+										th:placeholder="Citycode + ' ' + ${itemStat.count}"
+										th:field="*{users[0].phones[__${itemStat.index}__].citycode}"
+										required /></td>
+									<td><input
+										th:placeholder="Countrycode + ' ' + ${itemStat.count}"
+										th:field="*{users[0].phones[__${itemStat.index}__].contrycode}"
+										required /></td>
+								</tr>
+							</tbody>
+
+						</table>
+					</fieldset>
+					<div style="color: red;">
+						<p th:text="${form.mensajeError}" />
+					</div>
+					<div style="color: green;">
+						<p th:text="${form.mensaje}" />
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

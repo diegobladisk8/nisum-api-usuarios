@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>All users</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Usuarios</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-9">
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Email</th>
+							<th>Password</th>
+							<th>Created</th>
+							<th>Modifield</th>
+							<th>L.login</th>
+							<th>Active</th>
+							<th>Token</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${users.empty}">
+							<td colspan="2">No existe informacion...</td>
+						</tr>
+						<tr th:id="${book.id}" th:each="book : ${users}">
+							<td><a id="editview" class="btn btn-primary" href="#"
+								th:classappend="${users.empty} ? 'disabled' : ''"
+								th:href="@{'/users/edit/' + ${book.id}}"> <span>
+										Editar</span>
+							</a></td>
+							<td width="100%"><span th:text="${book.id}"> ID </span></td>
+							<td><span th:text="${book.name}"> Nombre </span></td>
+							<td><span th:text="${book.email}"> Email </span></td>
+							<td><span th:text="${book.password}"> Password </span></td>
+							<td><span th:text="${book.created}"> Created </span></td>
+							<td><span th:text="${book.modified}"> Modifed </span></td>
+							<td><span th:text="${book.lastLogin}"> L.Login </span></td>
+							<td><span th:text="${book.isactive}"> Acrive </span></td>
+							<td><span th:text="${book.token}"> Token </span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4">
+				<a class="btn btn-success" href="#" th:href="@{/users/create}">
+					Ingresar </a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
