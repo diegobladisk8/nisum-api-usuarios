@@ -57,6 +57,7 @@ public class UserService {
 		users.setToken(CommonUtil.getJWTToken(users.getEmail()));
 		usersRepository.save(users);
 		if (users.getPhones() != null) {
+			
 			users.getPhones().forEach(phone -> {
 				phone.setUser(users);
 				phonesRepository.save(phone);
